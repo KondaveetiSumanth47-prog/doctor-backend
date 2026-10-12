@@ -1,0 +1,10 @@
+target/
+.git/
+.gitignore
+*.log
+.mvn/wrapper/dists/
+.vscode/
+.idea/
+*.md
+*.bat
+*.ps1

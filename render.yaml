@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: doctor-appointment-backend
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    healthCheckPath: /api/doctors
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: doctor-appointment-db
+          property: connectionString
+      - key: FRONTEND_ORIGIN
+        value: https://doctor-frontend-blue.vercel.app
+      - key: SESSION_COOKIE_SAMESITE
+        value: none
+      - key: SESSION_COOKIE_SECURE
+        value: true
+      - key: ADMIN_EMAIL
+        value: admin@gmail.com
+      - key: ADMIN_PASSWORD
+        value: AdminPassword123!
+
+databases:
+  - name: doctor-appointment-db
+    plan: free
+    databaseName: doctor_appointment
+    user: doctor_app_user
