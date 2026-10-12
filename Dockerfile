@@ -27,7 +27,9 @@ FROM eclipse-temurin:25-jre AS runner
 WORKDIR /app
 
 # Create a non-root user for enhanced container security
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
+RUN (userdel -r ubuntu 2>/dev/null || true) && \
+    (useradd -m appuser || true) && \
+    chown -R appuser:appuser /app
 USER appuser
 
 # Copy the generated executable JAR from builder stage
